@@ -6,15 +6,25 @@ import Register from './Page/LoginRegisterRequireAuth/Register/Register'
 import Footer from './Page/Shared/Footer/Footer';
 import Header from './Page/Shared/Header/Header';
 import NotFound from './Page/Shared/NotFound/NotFound';
+import { Route, Routes } from 'react-router-dom';
+import Shop from './Page/Home/Shop/Shop';
+import Favorite from './Page/Home/Favorite/Favorite';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header></Header>
-      <Home></Home>
-      <Login></Login>
-      <Register></Register>
-      <NotFound></NotFound>
+        <Routes>
+          <Route path='/' element={<Home></Home>}></Route>
+          <Route path='/home' element={<Home></Home>}></Route>
+          <Route path='/shop' element={<Shop></Shop>}></Route>
+          <Route path='/login' element={<Login></Login>}></Route>
+          <Route path='/register' element={<Register></Register>}></Route>
+          <Route path='/favorite' element={<Favorite></Favorite>}></Route>
+          <Route path='/login' element={<Login></Login>}></Route>
+          <Route path='/register' element={<Register></Register>}></Route>
+          <Route path='*' element={<NotFound></NotFound>}></Route>
+        </Routes>
       <Footer></Footer>
     </div>
   );

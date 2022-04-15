@@ -1,23 +1,27 @@
 import React from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import './Header.css';
+import logo from '../../../images/Logo.svg'
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
         <div>
-            <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar sticky="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
                 <Container>
-                    <Navbar.Brand href="#home">Ema John</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/">
+                        <img src={logo} alt="" />
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#shop">Shop</Nav.Link>
+                            <Nav.Link as={Link} to="/home" href="#home">Home</Nav.Link>
+                            <Nav.Link as={Link} to="/shop" href="#shop">Shop</Nav.Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#favorite">Favorite item</Nav.Link>
-                            <Nav.Link eventKey={2} href="#signin">
-                                Signin
+                            <Nav.Link as={Link} to="/favorite" href="#favorite">Favorite item</Nav.Link>
+                            <Nav.Link eventKey={2} as={Link} to="/login" href="#signin">
+                                Login
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
