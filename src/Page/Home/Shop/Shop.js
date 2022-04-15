@@ -5,21 +5,23 @@ import './Shop.css';
 const Shop = () => {
     const [products, setProducts] = useState([]);
 
-    useEffect( () => {
+    useEffect(() => {
         fetch('products.json')
-        .then(res => res.json())
-        .then(data => setProducts(data));
+            .then(res => res.json())
+            .then(data => setProducts(data));
     }, []);
 
     return (
-        <div>
-            <h3>Our all products {products.length}</h3>
-            {
-                products.map(product => <Product
-                key={product.id}
-                product={product}
-                ></Product>)
-            }
+        <div className='container'>
+            <h3 className='text-primary text-center my-3'>Our Best products</h3>
+            <div className='row'>
+                {
+                    products.map(product => <Product
+                        key={product.id}
+                        product={product}
+                    ></Product>)
+                }
+            </div>
         </div>
     );
 };
