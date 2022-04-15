@@ -7,11 +7,6 @@ import banner4 from '../../../images/banner4.webp';
 import banner5 from '../../../images/banner5.webp';
 
 const banner = () => {
-    // const [index, setIndex] = useState(0);
-
-    // const handleSelect = (selectedIndex, e) => {
-    //     setIndex(selectedIndex);
-    // };
 
     return (
         <Carousel>
