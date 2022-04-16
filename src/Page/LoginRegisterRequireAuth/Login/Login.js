@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import auth from '../../../firebase.init';
 import './Login.css';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import Loading from '../../Shared/Loading/Loading';
 
 const Login = () => {
@@ -17,11 +17,13 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
     const navigate = useNavigate();
 
     let errorMessage;
 
-    if (loading) {
+    if (loading || sending) {
         return <Loading></Loading>
     }
 
@@ -41,6 +43,12 @@ const Login = () => {
         signInWithEmailAndPassword(email, password);
     }
 
+    const resetPassword = async () => {
+        const email = emailRef.current.value;
+        await sendPasswordResetEmail(email);
+        alert('Sent email');
+    }
+
     return (
         <div className='container w-50 mx-auto'>
             <h2 className='text-primary text-center mt-2'>Please Login</h2>
@@ -57,7 +65,7 @@ const Login = () => {
             </Form>
             {errorMessage}
             <p>New to Genius Car? <Link to="/register" className='text-primary pe-auto text-decoration-none'>Please Register</Link> </p>
-            <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none'>Reset Password</button> </p>
+            <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button> </p>
             <SocialLogin></SocialLogin>
         </div>
     );

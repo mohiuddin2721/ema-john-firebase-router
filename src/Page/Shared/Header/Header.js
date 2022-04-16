@@ -36,7 +36,7 @@ const Header = () => {
                                 <>
                                     <Nav.Link>{user?.displayName} </Nav.Link>
                                     <Navbar.Brand>
-                                        <img style={{'borderRadius': '50%'}} src={user?.photoURL} alt="" />
+                                        <img style={{'borderRadius': '50%', 'max-height' : '50px'}} src={user?.photoURL} alt="" />
                                     </Navbar.Brand>
                                 </>
                             }
