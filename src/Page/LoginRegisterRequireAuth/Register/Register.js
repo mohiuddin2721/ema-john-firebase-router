@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
@@ -6,13 +6,14 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import './Register.css';
 
 const Register = () => {
+    const [agree, setAgree] = useState(false);
 
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
 
     const navigate = useNavigate();
 
@@ -39,10 +40,11 @@ const Register = () => {
                 <input type="email" name="email" id="" placeholder='Email Address' required />
 
                 <input type="password" name="password" id="" placeholder='Password' required />
-                <input type="checkbox" name="terms" id="terms" />
+                <input onClick={() => setAgree(!false)} type="checkbox" name="terms" id="terms" />
                 {/* <label className={agree ? 'ps-2': 'ps-2 text-danger'} htmlFor="terms">Accept Genius Car Terms and Conditions</label> */}
-                <label htmlFor="terms">Accept Ema John Terms and Conditions</label>
+                <label className={`ps-2 ${agree ? '' : 'text-danger'}`} htmlFor="terms">Accept Ema John Terms and Conditions</label>
                 <input
+                    disabled={!agree}
                     className='w-50 mx-auto btn btn-primary mt-2'
                     type="submit"
                     value="Register" />
