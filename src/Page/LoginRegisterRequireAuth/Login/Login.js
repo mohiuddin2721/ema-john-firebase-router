@@ -1,19 +1,44 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import auth from '../../../firebase.init';
 import './Login.css';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import Loading from '../../Shared/Loading/Loading';
 
 const Login = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
 
+    const navigate = useNavigate();
 
+    let errorMessage;
 
-    const handleSubmit = () => {
+    if (loading) {
+        return <Loading></Loading>
+    }
+
+    if (user) {
+        navigate('/home');
+    }
+
+    if (error) {
+        errorMessage = <p className='text-danger'>Error: {error.message}</p>
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
+
+        signInWithEmailAndPassword(email, password);
     }
 
     return (
@@ -30,6 +55,7 @@ const Login = () => {
                     Login
                 </Button>
             </Form>
+            {errorMessage}
             <p>New to Genius Car? <Link to="/register" className='text-primary pe-auto text-decoration-none'>Please Register</Link> </p>
             <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none'>Reset Password</button> </p>
             <SocialLogin></SocialLogin>
