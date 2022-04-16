@@ -37,7 +37,7 @@ const Register = () => {
         navigate('/home');
     }
     return (
-        <div className='register-form'>
+        <div className='register-form login-container'>
             <h2 style={{ textAlign: 'center' }}>Please Register</h2>
             <form onSubmit={handleRegister}>
                 <input type="text" name="name" id="" placeholder='Your Name' />

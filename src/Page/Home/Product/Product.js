@@ -10,11 +10,16 @@ const Product = (props) => {
                 <Card.Img className='w-100 rounded' variant="top" src={img} />
                 <Card.Body>
                     <Card.Title className='text-primary'>{name}</Card.Title>
-                    <Card.Text className='p-0'>
-                        <h5 className='p-0 m-0'>Price: {price}</h5>
-                        <p className='p-0 m-0'>Brand: {seller}</p>
-                        <h6 className='text-success p-0 m-0'>Ratings: {ratings}</h6>
+                    <Card.Text className='p-0  m-0'>
+                        Price: {price}
                     </Card.Text>
+                    <Card.Text className='p-0 m-0'>
+                        Brand: {seller}
+                    </Card.Text>
+                    <Card.Text className='text-success p-0 m-0'>
+                        Ratings: {ratings}
+                    </Card.Text>
+
                 </Card.Body>
             </Card>
         </CardGroup>
